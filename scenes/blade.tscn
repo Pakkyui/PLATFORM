@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv1g80ikapx7t"]
+
+[ext_resource type="Texture2D" uid="uid://cwlv4qhulm86r" path="res://icon.svg" id="1_8appv"]
+[ext_resource type="Script" path="res://scripts/blade.gd" id="1_v70x1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6f64"]
+size = Vector2(12, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fd1ff"]
+size = Vector2(14, 16)
+
+[node name="Blade" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_v70x1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.09375, 0.109375)
+texture = ExtResource("1_8appv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n6f64")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_fd1ff")
