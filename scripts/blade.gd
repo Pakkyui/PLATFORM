@@ -11,4 +11,5 @@ func _physics_process(_delta):
 	if is_on_wall():
 		queue_free()
 	
+	
 	move_and_slide()
