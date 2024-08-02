@@ -1,5 +1,6 @@
 extends Node2D
 
+
 var blade_scene: PackedScene = preload("res://scenes/Blade.tscn")
 
 #func _on_player_blade():
