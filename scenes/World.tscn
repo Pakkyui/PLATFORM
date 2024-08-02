@@ -13,7 +13,7 @@ size = Vector2(446, 36)
 script = ExtResource("1_4qnki")
 
 [node name="player" parent="." instance=ExtResource("1_bvb2d")]
-position = Vector2(157, 108)
+position = Vector2(188, 174)
 jump_force = 600
 
 [node name="Platform" type="StaticBody2D" parent="."]
