@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dq5rv3h63yqs" path="res://assets/textures/_Fall.png" id="5_j4b0c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8u41k"]
-size = Vector2(26, 36)
+size = Vector2(21, 39)
 
 [sub_resource type="Animation" id="Animation_lpcx3"]
 length = 0.001
@@ -287,20 +287,19 @@ script = ExtResource("1_uvnam")
 jump_force = 800
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(6, -37)
+position = Vector2(6, -20)
 scale = Vector2(1, 1.01392)
 texture = ExtResource("2_6q4ag")
-flip_h = true
 hframes = 10
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -17)
+position = Vector2(0.5, 0.500004)
 shape = SubResource("RectangleShape2D_8u41k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -32)
-zoom = Vector2(0.5, 0.5)
+position = Vector2(0, -14.4432)
+zoom = Vector2(0.3, 0.3)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

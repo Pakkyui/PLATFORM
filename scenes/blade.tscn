@@ -11,8 +11,10 @@ collision_layer = 32
 script = ExtResource("1_praq0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
 scale = Vector2(0.03125, 0.109375)
 texture = ExtResource("1_rslwp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource("RectangleShape2D_oh4d7")
