@@ -20,7 +20,7 @@ func _physics_process(_delta):
 		if velocity.y > 1000:
 			velocity.y = 1000
 	
-	if Input.is_action_just_pressed("jump"): #&& is_on_floor():
+	if Input.is_action_just_pressed("up"): #&& is_on_floor():
 		velocity.y = -jump_force
 	
 	var horizontal_direction = Input.get_axis("left" , "right")
@@ -52,8 +52,8 @@ func fire():
 		var t = TBlade.instantiate()
 		t.direction = direction
 		get_parent().add_child(t)
-		t.position.y = position.y
-		t.position.x = position.x + 20 * direction 
+		t.position.y = position.y if not Input.is_action_pressed("up") else position.y - 25
+		t.position.x = position.x + 20 * direction if not Input.is_action_pressed("up") else position.x 
 		can_blade = false
 		$Timer.start()
 		blade.emit()

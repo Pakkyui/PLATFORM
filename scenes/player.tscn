@@ -311,4 +311,13 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="90" type="Marker2D" parent="."]
+position = Vector2(0, -21)
+
+[node name="45" type="Marker2D" parent="."]
+position = Vector2(14, -12)
+
+[node name="135" type="Marker2D" parent="."]
+position = Vector2(-12, -12)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
