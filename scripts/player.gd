@@ -8,8 +8,10 @@ var can_blade: bool = true
 @export var gravity = 30
 @export var jump_force = 300 
 @export var blade_force = 400
-
+const wall_jump_pushback = 100
 #@onready var ap = $AnimationPlayer
+
+
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
 const TBlade = preload("res://scenes/Blade.tscn")
@@ -45,14 +47,18 @@ func update_animations(horizontal_direction):
 			ap.play("jump")
 		elif velocity.y > 0:
 			ap.play("fall")
-
+			
+		
+			
 	#Blade shooting input
 func fire():
 	if Input.is_action_just_pressed("blade") && can_blade: 
+		var direction = 1 if not sprite.flip_h else -1
 		var t = TBlade.instantiate()
+		t.direction = direction
 		get_parent().add_child(t)
 		t.position.y = position.y
-		t.position.x = position.x
+		t.position.x = position.x + 20 * direction 
 		can_blade = false
 		$Timer.start()
 		blade.emit()
