@@ -18,3 +18,7 @@ texture = ExtResource("1_rslwp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_oh4d7")
+
+[node name="player_checker" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_checker"]

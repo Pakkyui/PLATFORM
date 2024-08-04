@@ -12,11 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://b63jl7pv2fbvf" path="res://assets/_WallHang.png" id="10_8ffws"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8u41k"]
-<<<<<<< HEAD
+
 size = Vector2(28.5, 37)
-=======
-size = Vector2(21, 39)
->>>>>>> f9804c32e1105b3db1513312114fe77cc4a232ba
+
+
 
 [sub_resource type="Animation" id="Animation_lpcx3"]
 length = 0.001
@@ -74,6 +73,7 @@ resource_name = "fall"
 length = 0.15
 loop_mode = 1
 step = 0.05
+
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -127,6 +127,7 @@ tracks/3/keys = {
 resource_name = "idle"
 loop_mode = 1
 step = 0.01
+
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -136,8 +137,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [ExtResource("2_6q4ag")]
+"update": 1,
+"values": [ExtResource("5_j4b0c")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -148,8 +149,8 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [10]
+"update": 1,
+"values": [3]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -160,7 +161,7 @@ tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [1]
 }
 tracks/3/type = "value"
@@ -170,6 +171,7 @@ tracks/3/path = NodePath("Sprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+
 "times": PackedFloat32Array(0, 0.09, 0.18, 0.27, 0.36, 0.44, 0.53, 0.62, 0.73, 0.83, 0.92),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
@@ -228,11 +230,13 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
+
 }
 
-[sub_resource type="Animation" id="Animation_xgjsw"]
-resource_name = "run"
+[sub_resource type="Animation" id="Animation_kquja"]
+resource_name = "idle"
 loop_mode = 1
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -242,8 +246,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_vodou")]
+"update": 0,
+"values": [ExtResource("2_6q4ag")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -254,7 +258,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [10]
 }
 tracks/2/type = "value"
@@ -266,7 +270,7 @@ tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [1]
 }
 tracks/3/type = "value"
@@ -276,13 +280,13 @@ tracks/3/path = NodePath("Sprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 0, 1, 2, 3, 4, 5, 6, 7, 9]
+"times": PackedFloat32Array(0, 0.09, 0.18, 0.27, 0.36, 0.44, 0.53, 0.62, 0.73, 0.83, 0.92),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9]
 }
 
-<<<<<<< HEAD
+
 [sub_resource type="Animation" id="Animation_6h4v1"]
 resource_name = "attack 1"
 length = 0.3
@@ -336,8 +340,10 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 5]
 }
 
+
 [sub_resource type="Animation" id="Animation_vfp8p"]
 resource_name = "attack 2"
+
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -348,7 +354,9 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
+
 "values": [ExtResource("7_s7oyw")]
+
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -360,7 +368,9 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
+
 "values": [6]
+
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -381,10 +391,12 @@ tracks/3/path = NodePath("Sprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 5, 5, 5, 5, 5]
+
 }
 
 [sub_resource type="Animation" id="Animation_hr6an"]
@@ -602,8 +614,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_7or8o"]
 resource_name = "wall slide"
 
-=======
->>>>>>> f9804c32e1105b3db1513312114fe77cc4a232ba
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h0rga"]
 _data = {
 "RESET": SubResource("Animation_lpcx3"),
@@ -625,37 +636,28 @@ script = ExtResource("1_uvnam")
 jump_force = 800
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-<<<<<<< HEAD
+
 position = Vector2(-51, -81)
 scale = Vector2(0.934688, 1.01392)
 texture = ExtResource("2_6q4ag")
 centered = false
 offset = Vector2(-6, 0)
 flip_h = true
-=======
-position = Vector2(6, -20)
-scale = Vector2(1, 1.01392)
-texture = ExtResource("2_6q4ag")
->>>>>>> f9804c32e1105b3db1513312114fe77cc4a232ba
+
+
 hframes = 10
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-<<<<<<< HEAD
+
 position = Vector2(2.25, -19)
 shape = SubResource("RectangleShape2D_8u41k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -31)
 zoom = Vector2(0.5, 0.5)
-=======
-position = Vector2(0.5, 0.500004)
-shape = SubResource("RectangleShape2D_8u41k")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -14.4432)
-zoom = Vector2(0.3, 0.3)
->>>>>>> f9804c32e1105b3db1513312114fe77cc4a232ba
+
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -666,5 +668,14 @@ libraries = {
 "": SubResource("AnimationLibrary_h0rga")
 }
 autoplay = "idle"
+
+[node name="90" type="Marker2D" parent="."]
+position = Vector2(0, -21)
+
+[node name="45" type="Marker2D" parent="."]
+position = Vector2(14, -12)
+
+[node name="135" type="Marker2D" parent="."]
+position = Vector2(-12, -12)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

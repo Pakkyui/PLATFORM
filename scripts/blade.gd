@@ -1,13 +1,17 @@
 extends CharacterBody2D
 
 var direction = 1
-const SPEED = 400
-const BOUNCE = -300
+
+const SPEED = 600
+const BOUNCE = -600
+
 
 func _ready():
 	velocity.x = SPEED * direction
 	
-	if  Input.is_action_pressed("jump"):
+
+	if  Input.is_action_pressed("up"):
+
 		velocity.y = -SPEED
 		velocity.x = 0
 		if Input.is_action_pressed("left"):
@@ -18,10 +22,18 @@ func _ready():
 		velocity.y = SPEED
 
 func _physics_process(_delta):
+	if velocity.length() > 600: velocity.normalized()
 	
 	if is_on_floor():
 		velocity.y = BOUNCE
 	if is_on_wall():
 		velocity.x = BOUNCE
+	if is_on_ceiling():
+		velocity.y = BOUNCE
+
 	
 	move_and_slide()
+	#_on_player_checker_body_entered()
+	
+#func _on_player_checker_body_entered():
+	
