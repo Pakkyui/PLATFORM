@@ -1,13 +1,17 @@
 extends CharacterBody2D
 
 var direction = 1
+
 const SPEED = 600
 const BOUNCE = -600
+
 
 func _ready():
 	velocity.x = SPEED * direction
 	
+
 	if  Input.is_action_pressed("up"):
+
 		velocity.y = -SPEED
 		velocity.x = 0
 		if Input.is_action_pressed("left"):
@@ -26,6 +30,7 @@ func _physics_process(_delta):
 		velocity.x = BOUNCE
 	if is_on_ceiling():
 		velocity.y = BOUNCE
+
 	
 	move_and_slide()
 	#_on_player_checker_body_entered()
