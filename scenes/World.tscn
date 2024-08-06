@@ -15,12 +15,13 @@ script = ExtResource("1_4qnki")
 [node name="player" parent="." instance=ExtResource("1_bvb2d")]
 position = Vector2(188, 174)
 speed = 300
-gravity = null
-blade_force = null
+gravity = 30
+blade_force = 400
 
 [node name="Platform" type="StaticBody2D" parent="."]
 position = Vector2(248, 255)
 scale = Vector2(50, 1)
+collision_layer = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Platform"]
 modulate = Color(0, 0.211765, 0.211765, 1)
@@ -33,6 +34,7 @@ shape = SubResource("RectangleShape2D_beh3j")
 [node name="Platform2" type="StaticBody2D" parent="."]
 position = Vector2(517, -42)
 rotation = 1.57079
+collision_layer = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Platform2"]
 modulate = Color(0, 0.211765, 0.211765, 1)
@@ -45,6 +47,7 @@ shape = SubResource("RectangleShape2D_beh3j")
 [node name="Platform3" type="StaticBody2D" parent="."]
 position = Vector2(635, -47)
 rotation = 1.57079
+collision_layer = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Platform3"]
 modulate = Color(0, 0.211765, 0.211765, 1)
@@ -56,6 +59,7 @@ shape = SubResource("RectangleShape2D_beh3j")
 
 [node name="Platform4" type="StaticBody2D" parent="."]
 position = Vector2(-374, 181)
+collision_layer = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Platform4"]
 modulate = Color(0, 0.211765, 0.211765, 1)
@@ -67,6 +71,7 @@ shape = SubResource("RectangleShape2D_beh3j")
 
 [node name="Platform5" type="StaticBody2D" parent="."]
 position = Vector2(-820, 129)
+collision_layer = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Platform5"]
 modulate = Color(0, 0.211765, 0.211765, 1)
@@ -78,6 +83,7 @@ shape = SubResource("RectangleShape2D_beh3j")
 
 [node name="Platform6" type="StaticBody2D" parent="."]
 position = Vector2(-1345, 30)
+collision_layer = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Platform6"]
 modulate = Color(0, 0.211765, 0.211765, 1)

@@ -284,10 +284,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uvnam")
-speed = null
-gravity = null
 jump_force = 800
-blade_force = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(6, -20)
@@ -313,15 +310,6 @@ libraries = {
 "": SubResource("AnimationLibrary_h0rga")
 }
 autoplay = "idle"
-
-[node name="90" type="Marker2D" parent="."]
-position = Vector2(0, -21)
-
-[node name="45" type="Marker2D" parent="."]
-position = Vector2(14, -12)
-
-[node name="135" type="Marker2D" parent="."]
-position = Vector2(-12, -12)
 
 [node name="PREDASHTIME" type="Timer" parent="."]
 wait_time = 0.2
