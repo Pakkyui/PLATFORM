@@ -301,10 +301,6 @@ shape = SubResource("RectangleShape2D_8u41k")
 position = Vector2(0, -14.4432)
 zoom = Vector2(0.3, 0.3)
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_h0rga")
@@ -316,5 +312,13 @@ wait_time = 0.2
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Charge" type="Timer" parent="."]
+one_shot = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="PREDASHTIME" to="." method="_on_predashtime_timeout"]
+[connection signal="timeout" from="Charge" to="." method="_on_charge_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
