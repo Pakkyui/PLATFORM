@@ -1,10 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://cf1q0xds64gf3"]
+[gd_scene load_steps=16 format=3 uid="uid://cf1q0xds64gf3"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_uvnam"]
 [ext_resource type="Texture2D" uid="uid://cvs6wwfrnheht" path="res://assets/textures/_Idle.png" id="2_6q4ag"]
 [ext_resource type="Texture2D" uid="uid://cedmvv2sfg65m" path="res://assets/textures/_Jump.png" id="3_pfqri"]
 [ext_resource type="Texture2D" uid="uid://sfno4f2av1rf" path="res://assets/textures/_Run.png" id="3_vodou"]
 [ext_resource type="Texture2D" uid="uid://dq5rv3h63yqs" path="res://assets/textures/_Fall.png" id="5_j4b0c"]
+[ext_resource type="PackedScene" uid="uid://b2c1cfm1gs18w" path="res://scenes/mblade.tscn" id="6_vhrbd"]
+[ext_resource type="PackedScene" uid="uid://dcc7hieyges6c" path="res://scenes/Blade.tscn" id="7_1t764"]
+[ext_resource type="PackedScene" uid="uid://bhmv4hhxl5k6" path="res://scenes/cblade.tscn" id="8_djwqp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8u41k"]
 size = Vector2(21, 39)
@@ -318,6 +321,12 @@ one_shot = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="MBlade" parent="." instance=ExtResource("6_vhrbd")]
+
+[node name="Blade" parent="." instance=ExtResource("7_1t764")]
+
+[node name="CBlade" parent="." instance=ExtResource("8_djwqp")]
 
 [connection signal="timeout" from="PREDASHTIME" to="." method="_on_predashtime_timeout"]
 [connection signal="timeout" from="Charge" to="." method="_on_charge_timeout"]

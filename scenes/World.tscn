@@ -91,4 +91,7 @@ mesh = SubResource("QuadMesh_cruwx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform6"]
 shape = SubResource("RectangleShape2D_beh3j")
 
+[node name="Tele" type="Timer" parent="."]
+
 [connection signal="blade" from="player" to="." method="_on_player_blade"]
+[connection signal="timeout" from="Tele" to="." method="_on_tele_timeout"]

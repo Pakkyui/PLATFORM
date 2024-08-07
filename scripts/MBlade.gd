@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 var direction = 1
-const SPEED = 600
-const BOUNCE = -600
+const SPEED = 800
+const BOUNCE = -800
 
 func _ready():
 	velocity.x = SPEED * direction
@@ -28,4 +28,5 @@ func _physics_process(_delta):
 		velocity.y = BOUNCE
 	
 	move_and_slide()
+	
 	

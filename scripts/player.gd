@@ -15,6 +15,8 @@ var direction = 1
 @onready var sprite = $Sprite2D
 const TBlade = preload("res://scenes/Blade.tscn")
 const CBlade = preload("res://scenes/cblade.tscn")
+const Mblade = preload("res://scenes/mblade.tscn") 
+
 #Input
 func _physics_process(_delta):
 	cblade()
@@ -79,7 +81,7 @@ func _physics_process(_delta):
 			if horizontal_direction != 0:
 				sprite.flip_h = (horizontal_direction == -1)
 			if Input.is_action_just_released("blade"):
-				fire()
+				mfire()
 				if not is_on_floor():
 					state = States.AIR
 				else:
@@ -121,7 +123,7 @@ func move_and_fall(slow_fall: bool):
 		if velocity.y > 4800:
 			velocity.y = 725
 	move_and_slide()
-	
+
 func update_animations(horizontal_direction):
 	if is_on_floor():
 		if horizontal_direction == 0:
@@ -134,6 +136,7 @@ func update_animations(horizontal_direction):
 		elif velocity.y > 0:
 			ap.play("fall")
 
+#blade state/functions
 func fire():
 	if can_blade: 
 		var t = TBlade.instantiate()
@@ -141,6 +144,15 @@ func fire():
 		get_parent().add_child(t)
 		t.position.y = position.y if not Input.is_action_pressed("up") else position.y - 25
 		t.position.x = position.x + 20 * direction if not Input.is_action_pressed("up") else position.x 
+		can_blade = false
+
+func mfire():
+	if can_blade: 
+		var m = Mblade.instantiate()
+		m.direction = direction
+		get_parent().add_child(m)
+		m.position.y = position.y if not Input.is_action_pressed("up") else position.y - 25
+		m.position.x = position.x + 20 * direction if not Input.is_action_pressed("up") else position.x 
 		can_blade = false
 
 func cfire():
@@ -159,7 +171,7 @@ func cblade():
 	if $Timer.is_stopped():
 		if is_on_floor():
 			can_blade = true
-		
+
 func _on_predashtime_timeout():
 	if Input.is_action_pressed("blade"):
 		state = States.CHARGE
