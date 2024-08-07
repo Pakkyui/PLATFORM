@@ -14,7 +14,7 @@ var direction = 1
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
 const TBlade = preload("res://scenes/Blade.tscn")
-
+const CBlade = preload("res://scenes/cblade.tscn")
 #Input
 func _physics_process(_delta):
 	cblade()
@@ -143,6 +143,15 @@ func fire():
 		t.position.x = position.x + 20 * direction if not Input.is_action_pressed("up") else position.x 
 		can_blade = false
 
+func cfire():
+	if can_blade: 
+		var c = CBlade.instantiate()
+		c.direction = direction
+		get_parent().add_child(c)
+		c.position.y = position.y if not Input.is_action_pressed("up") else position.y - 25
+		c.position.x = position.x + 20 * direction if not Input.is_action_pressed("up") else position.x 
+		can_blade = false
+
 func cblade():
 	if Input.is_action_just_released("blade") && can_blade:
 		$Timer.start()
@@ -158,7 +167,7 @@ func _on_predashtime_timeout():
 
 func _on_charge_timeout():
 	if Input.is_action_pressed("blade"):
-		fire()
+		cfire()
 	if not is_on_floor():
 		state = States.AIR
 	else:
