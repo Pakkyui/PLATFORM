@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 var direction = 1
 const SPEED = 1200
 const BOUNCE = -1200

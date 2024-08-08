@@ -12,7 +12,7 @@ size = Vector2(446, 36)
 [node name="WORLD" type="Node2D"]
 script = ExtResource("1_4qnki")
 
-[node name="player" parent="." instance=ExtResource("1_bvb2d")]
+[node name="Player" parent="." instance=ExtResource("1_bvb2d")]
 position = Vector2(188, 174)
 speed = 300
 
@@ -91,7 +91,6 @@ mesh = SubResource("QuadMesh_cruwx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform6"]
 shape = SubResource("RectangleShape2D_beh3j")
 
-[node name="Tele" type="Timer" parent="."]
+[node name="Blades" type="Node2D" parent="."]
 
-[connection signal="blade" from="player" to="." method="_on_player_blade"]
-[connection signal="timeout" from="Tele" to="." method="_on_tele_timeout"]
+[connection signal="blade" from="Player" to="." method="_on_player_blade"]

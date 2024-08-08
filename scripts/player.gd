@@ -1,6 +1,6 @@
 extends CharacterBody2D
- 
-signal blade
+
+signal blade 
 enum States{AIR = 1, FLOOR, CHARGE, WALL, DASH, PREDASH}
 var state = States.AIR
 var can_blade: bool = true
@@ -145,6 +145,7 @@ func fire():
 		t.position.y = position.y if not Input.is_action_pressed("up") else position.y - 25
 		t.position.x = position.x + 20 * direction if not Input.is_action_pressed("up") else position.x 
 		can_blade = false
+		
 
 func mfire():
 	if can_blade: 
@@ -154,6 +155,7 @@ func mfire():
 		m.position.y = position.y if not Input.is_action_pressed("up") else position.y - 25
 		m.position.x = position.x + 20 * direction if not Input.is_action_pressed("up") else position.x 
 		can_blade = false
+		
 
 func cfire():
 	if can_blade: 
@@ -163,6 +165,7 @@ func cfire():
 		c.position.y = position.y if not Input.is_action_pressed("up") else position.y - 25
 		c.position.x = position.x + 20 * direction if not Input.is_action_pressed("up") else position.x 
 		can_blade = false
+		
 
 func cblade():
 	if Input.is_action_just_released("blade") && can_blade:
@@ -184,3 +187,7 @@ func _on_charge_timeout():
 		state = States.AIR
 	else:
 		state = States.FLOOR
+
+	
+	
+
