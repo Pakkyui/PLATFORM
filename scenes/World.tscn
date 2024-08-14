@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsw14ox7b7xdt"]
+[gd_scene load_steps=6 format=3 uid="uid://dsw14ox7b7xdt"]
 
 [ext_resource type="Script" path="res://scripts/World.gd" id="1_4qnki"]
 [ext_resource type="PackedScene" uid="uid://cf1q0xds64gf3" path="res://scenes/player.tscn" id="1_bvb2d"]
+[ext_resource type="Script" path="res://scripts/Blades.gd" id="3_pnblb"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_cruwx"]
 size = Vector2(1000, 100)
@@ -13,8 +14,6 @@ size = Vector2(446, 36)
 script = ExtResource("1_4qnki")
 
 [node name="Player" parent="." instance=ExtResource("1_bvb2d")]
-position = Vector2(188, 174)
-speed = 300
 
 [node name="Platform" type="StaticBody2D" parent="."]
 position = Vector2(248, 255)
@@ -92,5 +91,13 @@ mesh = SubResource("QuadMesh_cruwx")
 shape = SubResource("RectangleShape2D_beh3j")
 
 [node name="Blades" type="Node2D" parent="."]
+script = ExtResource("3_pnblb")
+
+[node name="Port" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
 
 [connection signal="blade" from="Player" to="." method="_on_player_blade"]
+[connection signal="child_entered_tree" from="Blades" to="." method="_on_blades_child_entered_tree"]
+[connection signal="tele" from="Blades" to="." method="_on_blades_tele"]
+[connection signal="timeout" from="Port" to="." method="_on_port_timeout"]

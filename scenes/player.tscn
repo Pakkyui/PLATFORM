@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cf1q0xds64gf3"]
+[gd_scene load_steps=13 format=3 uid="uid://cf1q0xds64gf3"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_uvnam"]
 [ext_resource type="Texture2D" uid="uid://cvs6wwfrnheht" path="res://assets/textures/_Idle.png" id="2_6q4ag"]
-[ext_resource type="Script" path="res://scripts/BladeHandler.gd" id="2_br5do"]
 [ext_resource type="Texture2D" uid="uid://cedmvv2sfg65m" path="res://assets/textures/_Jump.png" id="3_pfqri"]
 [ext_resource type="Texture2D" uid="uid://sfno4f2av1rf" path="res://assets/textures/_Run.png" id="3_vodou"]
 [ext_resource type="Texture2D" uid="uid://dq5rv3h63yqs" path="res://assets/textures/_Fall.png" id="5_j4b0c"]
@@ -285,13 +284,9 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uvnam")
-jump_force = 800
-
-[node name="BladeHandler" type="Node" parent="."]
-script = ExtResource("2_br5do")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(6, -20)
+position = Vector2(1, -21)
 scale = Vector2(1, 1.01392)
 texture = ExtResource("2_6q4ag")
 hframes = 10
@@ -303,7 +298,9 @@ shape = SubResource("RectangleShape2D_8u41k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14.4432)
-zoom = Vector2(0.3, 0.3)
+zoom = Vector2(0.32, 0.32)
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -311,18 +308,28 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="PREDASHTIME" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-autostart = true
+[node name="BladeStartPositions" type="Node2D" parent="."]
+
+[node name="90" type="Marker2D" parent="BladeStartPositions"]
+position = Vector2(0, -2)
 
 [node name="Charge" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="PREDASHTIME" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
-[connection signal="timeout" from="PREDASHTIME" to="." method="_on_predashtime_timeout"]
+[node name="PDT" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
 [connection signal="timeout" from="Charge" to="." method="_on_charge_timeout"]
+[connection signal="timeout" from="PREDASHTIME" to="." method="_on_predashtime_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="PDT" to="." method="_on_pdt_timeout"]
