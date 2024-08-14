@@ -1,38 +1,43 @@
 extends CharacterBody2D
- 
-signal blade
-enum States{AIR = 1, FLOOR, CHARGE, WALL, DASH, PREDASH}
+
+signal blade(pos, direction)
+enum States{AIR = 1, FLOOR, CHARGE, WALL, DASH, PREDASH, POSTDASH}
 var state = States.AIR
 var can_blade: bool = true
-var air_fric = 1300
-@export var speed = 150
+var air_fric = 1000
+var charge_fric = 0.1
+var direction = 1
+var charging := false
+@export var speed = 300
 @export var gravity = 30
-@export var jump_force = 200 
-@export var blade_force = 400
+var jump_force = 700
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
-const TBlade = preload("res://scenes/Blade.tscn")
 
 #Input
 func _physics_process(_delta):
-	print(state)
 	cblade()
+	
 	match state:
 		States.AIR:
 			if is_on_floor():
 				state = States.FLOOR
+			elif is_on_wall():
+				state = States.WALL
 			if Input.is_action_just_pressed("blade") && can_blade:
 				state = States.PREDASH
 				$PREDASHTIME.start()
 			var horizontal_direction = Input.get_axis("left" , "right")
 			if horizontal_direction != 0:
-				velocity.x = move_toward(velocity.x, 20 * horizontal_direction, air_fric * _delta)
+				velocity.x = move_toward(velocity.x, speed * horizontal_direction, air_fric * _delta)
 			else:
 				velocity.x = move_toward(velocity.x, 0 ,air_fric * _delta)
 			if horizontal_direction != 0:
 				sprite.flip_h = (horizontal_direction == -1)
-			move_and_fall()
+			move_and_fall(false)
+			set_direction()
 			update_animations(horizontal_direction)
+		
 		States.FLOOR:
 			if Input.is_action_just_pressed("blade") && can_blade:
 				state = States.PREDASH
@@ -47,52 +52,84 @@ func _physics_process(_delta):
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = -jump_force
 				state = States.AIR
-			move_and_fall()
+			move_and_fall(false)
+			set_direction()
 			update_animations(horizontal_direction)
+		
 		States.PREDASH:
 			if Input.is_action_just_released("blade"):
 				state = States.DASH
-			if $PREDASHTIME.is_stopped():
-				state = States.CHARGE
-			move_and_fall()
+			move_and_fall(false)
+			set_direction()
+		
 		States.DASH:
 			fire()
-			if not is_on_floor():
-				state = States.AIR
-			else:
-				state = States.FLOOR
+			state = States.POSTDASH
+			$PDT.start()
+		
 		States.CHARGE:
+			if Input.is_action_just_released("blade"):
+				mfire()
+				state = States.POSTDASH
+				$PDT.start()
+			set_direction()
+			charge_and_fall()
+		
+		States.WALL:
+			if is_on_floor():
+				state = States.FLOOR
+			elif not is_on_wall():
+				state = States.AIR
+			if Input.is_action_just_pressed("down"):
+				state = States.AIR
+				velocity.x = 30 * -direction
+			if Input.is_action_just_pressed("blade") && can_blade:
+				state = States.PREDASH
+			if Input.is_action_pressed("jump") && ((Input.is_action_pressed("left") and direction == 1) or Input.is_action_pressed("right") and direction == -1):
+				velocity.x = 400 * -direction
+				velocity.y = -jump_force * 0.9
+				state = States.AIR
+			move_and_fall(true)
+		
+		States.POSTDASH:
 			var horizontal_direction = Input.get_axis("left" , "right")
 			if horizontal_direction != 0:
-				velocity.x = move_toward(velocity.x, 20 * horizontal_direction, air_fric * _delta)
+				velocity.x = move_toward(velocity.x, speed * horizontal_direction, air_fric * _delta)
 			else:
 				velocity.x = move_toward(velocity.x, 0 ,air_fric * _delta)
 			if horizontal_direction != 0:
 				sprite.flip_h = (horizontal_direction == -1)
-			if Input.is_action_just_released("blade"):
-				fire()
-				if not is_on_floor():
-					state = States.AIR
-				else:
-					state = States.FLOOR
-			charge_and_fall()
-				
-func charge_and_fall():
-	if !is_on_floor():  
-		velocity.y = gravity
-		if velocity.y > 0.1:
-			velocity.y = 0.1
-		if velocity.x > 30:
-			velocity.x = 30
-	move_and_fall()
+			orientation_fall()
 
-func move_and_fall():
+func set_direction():
+		direction = 1 if not sprite.flip_h else -1
+
+func charge_and_fall():
+	if velocity.y > 50:
+		velocity.y = 50
+	if velocity.x > 50:
+		velocity.x = 50
+	if velocity.x < -50:
+		velocity.x = -50
+	move_and_slide()
+
+func orientation_fall():
+	if !is_on_floor():
+		velocity.y += gravity  
+	if velocity.y > 1:
+		velocity.y = 2
+	move_and_slide()
+
+func move_and_fall(slow_fall: bool):
+	if slow_fall:
+		if velocity.y > 50:
+			velocity.y = 50
 	if !is_on_floor():  
 		velocity.y += gravity
-		if velocity.y > 1000:
-			velocity.y = 1000
+		if velocity.y > 480:
+			velocity.y = 725
 	move_and_slide()
-	
+
 func update_animations(horizontal_direction):
 	if is_on_floor():
 		if horizontal_direction == 0:
@@ -105,27 +142,50 @@ func update_animations(horizontal_direction):
 		elif velocity.y > 0:
 			ap.play("fall")
 
-	#Blade shooting input
+#blade state/functions
 func fire():
 	if can_blade: 
-		var direction = 1 if not sprite.flip_h else -1
-		var t = TBlade.instantiate()
-		t.direction = direction
-		get_parent().add_child(t)
-		t.position.y = position.y if not Input.is_action_pressed("up") else position.y - 25
-		t.position.x = position.x + 20 * direction if not Input.is_action_pressed("up") else position.x 
+		var pos = $BladeStartPositions.get_children()[0].global_position
+		var direction = (get_global_mouse_position() - position).normalized() 
 		can_blade = false
+		blade.emit(pos, direction)
+
+func mfire():
+	if can_blade: 
+		can_blade = false
+		var pos = $BladeStartPositions.get_children()[0].global_position
+		var direction = (get_global_mouse_position() - position).normalized()
+		blade.emit(pos, direction)
+
+func cfire():
+	if can_blade: 
+		can_blade = false
+		var pos = $BladeStartPositions.get_children()[0].global_position
+		var direction = (get_global_mouse_position() - position).normalized()
+		blade.emit(pos, direction)
 
 func cblade():
 	if Input.is_action_just_released("blade") && can_blade:
 		$Timer.start()
-		blade.emit()
-	
 	if $Timer.is_stopped():
 		if is_on_floor():
 			can_blade = true
-		
+
 func _on_predashtime_timeout():
 	if Input.is_action_pressed("blade"):
 		state = States.CHARGE
+		$Charge.start()
 
+func _on_charge_timeout():
+	if Input.is_action_pressed("blade"):
+		cfire()
+	if not is_on_floor():
+		state = States.AIR
+	else:
+		state = States.FLOOR
+
+func _on_pdt_timeout():
+	if not is_on_floor():
+		state = States.AIR
+	else:
+		state = States.FLOOR

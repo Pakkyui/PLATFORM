@@ -284,13 +284,9 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uvnam")
-speed = null
-gravity = null
-jump_force = 800
-blade_force = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(6, -20)
+position = Vector2(1, -21)
 scale = Vector2(1, 1.01392)
 texture = ExtResource("2_6q4ag")
 hframes = 10
@@ -302,11 +298,9 @@ shape = SubResource("RectangleShape2D_8u41k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14.4432)
-zoom = Vector2(0.3, 0.3)
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
+zoom = Vector2(0.32, 0.32)
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -314,19 +308,28 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="90" type="Marker2D" parent="."]
-position = Vector2(0, -21)
+[node name="BladeStartPositions" type="Node2D" parent="."]
 
-[node name="45" type="Marker2D" parent="."]
-position = Vector2(14, -12)
+[node name="90" type="Marker2D" parent="BladeStartPositions"]
+position = Vector2(0, -2)
 
-[node name="135" type="Marker2D" parent="."]
-position = Vector2(-12, -12)
+[node name="Charge" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [node name="PREDASHTIME" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
-autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="PDT" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="Charge" to="." method="_on_charge_timeout"]
 [connection signal="timeout" from="PREDASHTIME" to="." method="_on_predashtime_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="PDT" to="." method="_on_pdt_timeout"]
