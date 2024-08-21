@@ -284,6 +284,8 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uvnam")
+speed = 350
+gravity = 35
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, -21)
@@ -314,22 +316,17 @@ autoplay = "idle"
 position = Vector2(0, -2)
 
 [node name="Charge" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.25
 one_shot = true
 
 [node name="PREDASHTIME" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
 [node name="PDT" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.38
 one_shot = true
 
 [connection signal="timeout" from="Charge" to="." method="_on_charge_timeout"]
 [connection signal="timeout" from="PREDASHTIME" to="." method="_on_predashtime_timeout"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="PDT" to="." method="_on_pdt_timeout"]
