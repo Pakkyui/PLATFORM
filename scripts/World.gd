@@ -34,9 +34,3 @@ func _on_blades_child_exiting_tree(node):
 
 func _on_blades_child_entered_tree(node):
 	Playerstats.can_blade = false
-
-
-
-
-
-

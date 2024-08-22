@@ -85,6 +85,9 @@ func _physics_process(_delta):
 		States.WALL:
 			if is_on_floor():
 				state = States.FLOOR
+			if !is_on_wall():
+				if !is_on_floor():
+					state = States.AIR
 			if Input.is_action_just_pressed("down"):
 				state = States.AIR
 				velocity.x = 30 * -direction

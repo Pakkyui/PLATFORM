@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dsw14ox7b7xdt"]
 
 [ext_resource type="Script" path="res://scripts/World.gd" id="1_4qnki"]
-[ext_resource type="PackedScene" uid="uid://cf1q0xds64gf3" path="res://scenes/Player.tscn" id="1_bvb2d"]
+[ext_resource type="PackedScene" uid="uid://cf1q0xds64gf3" path="res://scenes/player.tscn" id="1_bvb2d"]
 [ext_resource type="Script" path="res://scripts/Blades.gd" id="3_pnblb"]
 [ext_resource type="PackedScene" uid="uid://5hwaeysgh5q6" path="res://scenes/bblade.tscn" id="4_ne8jo"]
 
@@ -529,9 +529,6 @@ position = Vector2(2553, -527)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fallzones/Fallzone2"]
 position = Vector2(2628.25, 254)
 shape = SubResource("RectangleShape2D_e5tak")
-
-[node name="TileMap" type="TileMap" parent="."]
-format = 2
 
 [connection signal="blade" from="Player" to="." method="_on_player_blade"]
 [connection signal="fblade" from="Player" to="." method="_on_player_fblade"]
