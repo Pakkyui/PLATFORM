@@ -6,7 +6,7 @@ signal fblade(pos, direction)
 enum States{AIR = 1, FLOOR, CHARGE, WALL, DASH, PREDASH, POSTDASH}
 var state = States.AIR
 #var can_blade: bool = true
-var air_fric = 1000
+var air_fric = 1100
 var charge_fric = 0.1
 var direction = 1
 var charging := false
@@ -18,13 +18,13 @@ var jump_force = 700
 
 #Input
 func _physics_process(_delta):
-	print(state)
+
 	match state:
 		States.AIR:
 			if is_on_floor():
 				state = States.FLOOR
-				Playerstats.can_blade = true
-				print("there")
+				if Playerstats.has_blade:
+					Playerstats.can_blade = true
 			elif is_on_wall():
 				state = States.WALL
 			if Input.is_action_just_released("jump"):
@@ -62,9 +62,10 @@ func _physics_process(_delta):
 			move_and_fall(false)
 			set_direction()
 			update_animations(horizontal_direction)
-		
+
+
 		States.PREDASH:
-			if Input.is_action_just_released("blade"):
+			if Input.is_action_pressed("blade"):
 				state = States.DASH
 			move_and_fall(false)
 			set_direction()
@@ -72,7 +73,6 @@ func _physics_process(_delta):
 		States.DASH:
 			fire()
 			state = States.POSTDASH
-			$PDT.start()
 		
 		#States.CHARGE:
 			#if Input.is_action_just_released("blade"):
@@ -107,6 +107,12 @@ func _physics_process(_delta):
 				velocity.x = move_toward(velocity.x, 0 ,air_fric * _delta)
 			if horizontal_direction != 0:
 				sprite.flip_h = (horizontal_direction == -1)
+			if Playerstats.has_blade:
+				if is_on_floor():
+					state = States.FLOOR
+					Playerstats.can_blade = true
+				else:
+					state = States.AIR
 			charge_and_fall()
 
 func set_direction():
@@ -186,23 +192,3 @@ func _on_predashtime_timeout():
 		#$PDT.start()
 	#else:
 		#state = States.FLOOR
-
-func _on_pdt_timeout():
-	if not is_on_floor():
-		state = States.AIR
-	else:
-		Playerstats.can_blade = true
-		print("here")
-		state = States.FLOOR
-
-
-func _on_fallzone_body_entered(body):
-	if body.name == "Player":
-		Playerstats.has_blade = false
-		get_tree().change_scene_to_file("res://scenes/World.tscn")
-
-
-func _on_fallzone_2_body_entered(body):
-	if body.name == "Player":
-		Playerstats.has_blade = false
-		get_tree().change_scene_to_file("res://scenes/World.tscn")

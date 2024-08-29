@@ -1,4 +1,5 @@
 extends Node2D
+class_name LevelParent
 
 var TBlade: PackedScene = preload("res://scenes/Tblade.tscn")
 
@@ -29,8 +30,8 @@ func _on_blades_child_exiting_tree(node):
 	$Player.global_position = tele_position
 	$Player.velocity.x = 0
 	$Player.velocity.y = 0
-
-
+	Playerstats.has_blade = true
 
 func _on_blades_child_entered_tree(node):
+	Playerstats.has_blade = false
 	Playerstats.can_blade = false
