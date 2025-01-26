@@ -9,7 +9,7 @@
 size = Vector2(1000, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_beh3j"]
-size = Vector2(446, 36)
+size = Vector2(446.294, 36)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_es4mn"]
 height = 21.8608
@@ -498,20 +498,6 @@ mesh = SubResource("QuadMesh_cruwx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform25"]
 shape = SubResource("RectangleShape2D_beh3j")
 
-[node name="Platform26" type="StaticBody2D" parent="Platforms"]
-position = Vector2(4509, -719)
-rotation = 4.71238
-scale = Vector2(0.747894, 1.79867)
-collision_layer = 3
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Platforms/Platform26"]
-modulate = Color(0, 0.211765, 0.211765, 1)
-scale = Vector2(0.446, 0.36)
-mesh = SubResource("QuadMesh_cruwx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform26"]
-shape = SubResource("RectangleShape2D_beh3j")
-
 [node name="Bblade" parent="." instance=ExtResource("4_ne8jo")]
 position = Vector2(3708, -585)
 
@@ -531,8 +517,6 @@ position = Vector2(2628.25, 254)
 shape = SubResource("RectangleShape2D_e5tak")
 
 [connection signal="blade" from="Player" to="." method="_on_player_blade"]
-[connection signal="fblade" from="Player" to="." method="_on_player_fblade"]
-[connection signal="mblade" from="Player" to="." method="_on_player_mblade"]
 [connection signal="child_entered_tree" from="Blades" to="." method="_on_blades_child_entered_tree"]
 [connection signal="child_exiting_tree" from="Blades" to="." method="_on_blades_child_exiting_tree"]
 [connection signal="tele" from="Blades" to="." method="_on_blades_tele"]

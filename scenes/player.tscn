@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://sfno4f2av1rf" path="res://assets/textures/_Run.png" id="3_vodou"]
 [ext_resource type="Texture2D" uid="uid://dq5rv3h63yqs" path="res://assets/textures/_Fall.png" id="5_j4b0c"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8u41k"]
-size = Vector2(21, 39)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oufc8"]
+height = 39.0
 
 [sub_resource type="Animation" id="Animation_lpcx3"]
 length = 0.001
@@ -288,19 +288,18 @@ speed = 350
 gravity = 35
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -21)
+position = Vector2(5, -21)
 scale = Vector2(1, 1.01392)
 texture = ExtResource("2_6q4ag")
 hframes = 10
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0.500004)
-shape = SubResource("RectangleShape2D_8u41k")
+shape = SubResource("CapsuleShape2D_oufc8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14.4432)
-zoom = Vector2(0.32, 0.32)
+zoom = Vector2(0.25, 0.25)
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 
@@ -326,6 +325,12 @@ one_shot = true
 [node name="PDT" type="Timer" parent="."]
 wait_time = 0.38
 one_shot = true
+
+[node name="Wallchecker" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+rotation = -1.5708
+target_position = Vector2(-9.53674e-07, 25)
+collision_mask = 2
 
 [connection signal="timeout" from="Charge" to="." method="_on_charge_timeout"]
 [connection signal="timeout" from="PREDASHTIME" to="." method="_on_predashtime_timeout"]
