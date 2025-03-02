@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsw14ox7b7xdt"]
+[gd_scene load_steps=10 format=3 uid="uid://dsw14ox7b7xdt"]
 
 [ext_resource type="Script" path="res://scripts/World.gd" id="1_4qnki"]
 [ext_resource type="PackedScene" uid="uid://cf1q0xds64gf3" path="res://scenes/player.tscn" id="1_bvb2d"]
 [ext_resource type="Script" path="res://scripts/Blades.gd" id="3_pnblb"]
 [ext_resource type="PackedScene" uid="uid://5hwaeysgh5q6" path="res://scenes/bblade.tscn" id="4_ne8jo"]
+[ext_resource type="PackedScene" uid="uid://cduyb7wxvru7l" path="res://scenes/groundEnemy.tscn" id="5_1s8h4"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_cruwx"]
 size = Vector2(1000, 100)
@@ -20,8 +21,13 @@ size = Vector2(4523.5, 92)
 [node name="WORLD" type="Node2D"]
 script = ExtResource("1_4qnki")
 
+[node name="groundEnemy" parent="." instance=ExtResource("5_1s8h4")]
+position = Vector2(3245, -951)
+collision_layer = 17
+
 [node name="Player" parent="." instance=ExtResource("1_bvb2d")]
 position = Vector2(3647, -608)
+collision_layer = 17
 
 [node name="Blades" type="Node2D" parent="."]
 script = ExtResource("3_pnblb")
@@ -32,7 +38,8 @@ script = ExtResource("3_pnblb")
 position = Vector2(199, 44)
 rotation = 3.14159
 scale = Vector2(1.78905, 1.02319)
-collision_layer = 3
+collision_layer = 0
+collision_mask = 2
 metadata/_edit_group_ = true
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Platforms/Platform4"]
@@ -519,6 +526,5 @@ shape = SubResource("RectangleShape2D_e5tak")
 [connection signal="blade" from="Player" to="." method="_on_player_blade"]
 [connection signal="child_entered_tree" from="Blades" to="." method="_on_blades_child_entered_tree"]
 [connection signal="child_exiting_tree" from="Blades" to="." method="_on_blades_child_exiting_tree"]
-[connection signal="tele" from="Blades" to="." method="_on_blades_tele"]
 [connection signal="body_entered" from="Fallzones/Fallzone" to="Player" method="_on_fallzone_body_entered"]
 [connection signal="body_entered" from="Fallzones/Fallzone2" to="Player" method="_on_fallzone_2_body_entered"]

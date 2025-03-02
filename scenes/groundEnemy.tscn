@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cduyb7wxvru7l"]
+
+[ext_resource type="Script" path="res://scripts/groundEnemy.gd" id="1_uapr5"]
+[ext_resource type="Texture2D" uid="uid://cwlv4qhulm86r" path="res://icon.svg" id="2_y5y6u"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aeemo"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_thcon"]
+radius = 14.0
+height = 60.0
+
+[node name="groundEnemy" type="CharacterBody2D"]
+collision_layer = 6
+collision_mask = 2
+script = ExtResource("1_uapr5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.863436, 5.31845e-06, 7.70092e-07, 1)
+light_mask = 7
+visibility_layer = 7
+scale = Vector2(0.21875, 0.46875)
+texture = ExtResource("2_y5y6u")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 63
+collision_mask = 63
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_aeemo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 15
+visibility_layer = 15
+shape = SubResource("CapsuleShape2D_thcon")
+
+[node name="DirectionTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]

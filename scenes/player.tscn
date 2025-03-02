@@ -283,6 +283,8 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_uvnam")
 speed = 350
 gravity = 35
