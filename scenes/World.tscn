@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://dsw14ox7b7xdt"]
 
-[ext_resource type="Script" path="res://scripts/World.gd" id="1_4qnki"]
+[ext_resource type="Script" uid="uid://dw2nv2yhfjc1d" path="res://scripts/World.gd" id="1_4qnki"]
 [ext_resource type="PackedScene" uid="uid://cf1q0xds64gf3" path="res://scenes/player.tscn" id="1_bvb2d"]
-[ext_resource type="Script" path="res://scripts/Blades.gd" id="3_pnblb"]
+[ext_resource type="Script" uid="uid://r3tkgjhnrmbn" path="res://scripts/Blades.gd" id="3_pnblb"]
 [ext_resource type="PackedScene" uid="uid://5hwaeysgh5q6" path="res://scenes/bblade.tscn" id="4_ne8jo"]
 [ext_resource type="PackedScene" uid="uid://cduyb7wxvru7l" path="res://scenes/groundEnemy.tscn" id="5_1s8h4"]
 

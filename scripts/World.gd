@@ -6,7 +6,7 @@ func _on_player_blade(pos, direction):
 	var blade = TBlade.instantiate() as RigidBody2D
 	blade.position = pos
 	blade.rotation_degrees = rad_to_deg(direction.angle()) + 90
-	blade.linear_velocity = direction * 2
+	blade.linear_velocity = direction * 3000
 	$Blades.add_child(blade)
 
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dtrwve8sx7bud"]
 
 [ext_resource type="Texture2D" uid="uid://cwlv4qhulm86r" path="res://icon.svg" id="1_6gld6"]
-[ext_resource type="Script" path="res://scripts/Tblade.gd" id="1_q16jj"]
+[ext_resource type="Script" uid="uid://cukd7kkidgjre" path="res://scripts/Tblade.gd" id="1_q16jj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8susr"]
 friction = 0.0
@@ -40,6 +40,7 @@ scale = Vector2(9, 9)
 shape = SubResource("CircleShape2D_dx1sf")
 
 [node name="Self_destruct" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 0.2
+one_shot = true
 
 [connection signal="timeout" from="Self_destruct" to="." method="_on_self_destruct_timeout"]
