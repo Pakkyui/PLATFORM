@@ -307,7 +307,7 @@ position_smoothing_speed = 7.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_h0rga")
+&"": SubResource("AnimationLibrary_h0rga")
 }
 autoplay = "idle"
 
